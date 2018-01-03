@@ -1,5 +1,5 @@
 # crypto-profit
-Shows actual values and profits of coins from coinmarketcap.com
+Shows actual values and profits of coins based on coinmarketcap.com
 
 # coins.txt
 
