@@ -79,9 +79,15 @@ class coinmarket_infos(object):
         """
         Get last infos about coin
         """
-        url = 'https://api.coinmarketcap.com/v1/ticker/' + self.name
-        rep = requests.get(url)
-        self.store_infos(rep.json()[0])
+        try:
+            url = 'https://api.coinmarketcap.com/v1/ticker/' + self.name
+            rep = requests.get(url)
+            self.store_infos(rep.json()[0])
+
+        except Exception as err:
+            print ('Error when calling API: ', err)
+            print (format_exc())
+            exit()
 
     def store_infos(self, infos):
         self.symbol = infos['symbol']
