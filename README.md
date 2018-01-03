@@ -1,7 +1,7 @@
 # crypto-profit
-Shows actual value and profits from owned cryptocurrencies
+Shows actual values and profits of coins from coinmarketcap.com
 
-# my_coins.txt
+# coins.txt
 
 The file must be parse as follow:
 ```
@@ -9,7 +9,7 @@ currency fullname;number owned;purchase price
 *If fullname have more than one word, separate each with '-'
 ```
 
-###Ex:
+### Ex:
 
 ```
 bitcoin;2;42000

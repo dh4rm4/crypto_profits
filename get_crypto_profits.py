@@ -91,7 +91,7 @@ class coinmarket_infos(object):
 
 def get_coins_from_files():
     """
-    Open the file my_coins.txt.
+    Open the file coins.txt.
     It must have the hierachy:
     fullname_coin;number_possessed;purchase_price
 
@@ -100,13 +100,13 @@ def get_coins_from_files():
     """
     try:
         coins_list = list()
-        f = open('my_coins.txt', 'r')
+        f = open('coins.txt', 'r')
         for line in f:
             coins_list.append(line)
         return coins_list
 
     except Exception as err:
-        print ('Error when opening my_coins.txt: ', err)
+        print ('Error when opening coins.txt: ', err)
         print (format_exc())
         exit()
 
