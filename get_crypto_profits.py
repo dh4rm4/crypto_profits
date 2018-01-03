@@ -6,13 +6,13 @@ import json
 
 
 class col:
-    LOWRED      = '\033[94m'
-    OKGREEN     = '\033[92m'
-    YELLOW      = '\033[93m'
-    FAIL        = '\033[91m'
-    ENDC        = '\033[0m'
-    BOLD        = '\033[1m'
-    UNDERLINE   = '\033[4m'
+    LOWRED = '\033[94m'
+    OKGREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 
 class coins(object):
@@ -43,7 +43,7 @@ class coins(object):
 
     def output_color(self):
         print (col.BOLD, end='')
-        if self.positif_evol == True:
+        if self.positif_evol is True:
             print (col.OKGREEN, end='')
         else:
             print (col.FAIL, end='')
@@ -64,6 +64,7 @@ class coins(object):
         self.output_color()
         print (str(round(self.percent_earn, 2)) + '%')
         self.end_color()
+
 
 class coinmarket_infos(object):
     """
@@ -115,6 +116,7 @@ def get_coins_from_files():
         print ('Error when opening coins.txt: ', err)
         print (format_exc())
         exit()
+
 
 def release_the_beast():
     """
