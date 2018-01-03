@@ -15,22 +15,39 @@ class col:
     UNDERLINE = '\033[4m'
 
 
-def print_total_earn(value):
-    print (col.BLUE +
-           col.BOLD +
-           col.UNDERLINE +
-           'TOTAL EARN:' +
-           col.ENDC, end='')
-    if value > 0:
-        print (col.OKGREEN, end='')
-    else:
-        print (col.FAIL, end='')
-    print (' ' + str(round(value, 2)) + col.ENDC)
+class print_total_stats(object):
+    """
+    Final output of all stats
+    """
+    def __init__(self, total_value, total_earn):
+        self.total_value = total_value
+        self.earn = total_earn
+
+    def print_total_value(self):
+        print (col.BLUE +
+               col.BOLD +
+               col.UNDERLINE +
+               'TOTAL VALUE:' +
+               col.ENDC +
+               col.BOLD, end='')
+        print (' ' + str(round(self.total_value, 2)) + col.ENDC + col.ENDC)
+
+    def print_total_earn(self):
+        print (col.BLUE +
+               col.BOLD +
+               col.UNDERLINE +
+               'TOTAL EARN:' +
+               col.ENDC, end='')
+        if self.earn > 0:
+            print (col.OKGREEN, end='')
+        else:
+            print (col.FAIL, end='')
+        print ('  ' + str(round(self.earn, 2)) + col.ENDC + '$')
 
 
 class coins(object):
     """
-    Coin object to store coin info
+    Coin object to store coin infos
     """
 
     def __init__(self, name, symbol, purc_value, curr_price, number):
@@ -43,6 +60,7 @@ class coins(object):
         self.value_earn = float(0)
         self.percent_earn = 0
         self.positif_evol = False
+        self.total_value = self.number * self.curr_price
 
     def profits_calc(self):
         """
@@ -71,7 +89,7 @@ class coins(object):
                col.ENDC +
                ':  ', end='')
         self.output_color()
-        print (round(self.value_earn, 2), end='')
+        print (str(round(self.value_earn, 2)) + '$', end='')
         self.end_color()
         print ('\t->\t', end='')
         self.output_color()
@@ -138,6 +156,7 @@ def release_the_beast():
     coins_list = get_coins_from_files()
     format_coins = ()
     total_earn = 0
+    total_value = 0
     for coin_info in coins_list:
         # Parse / get local and live infos on coin
         name, number, purchase_price = coin_info.replace('\n', '').split(';')
@@ -153,7 +172,10 @@ def release_the_beast():
         coin_stats.profits_calc()
         coin_stats.print_stats()
         total_earn += coin_stats.value_earn
-    print_total_earn(total_earn)
+        total_value += coin_stats.total_value
+    p = print_total_stats(total_value, total_earn)
+    p.print_total_value()
+    p.print_total_earn()
 
 if __name__ in '__main__':
     release_the_beast()
