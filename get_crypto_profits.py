@@ -6,13 +6,26 @@ import json
 
 
 class col:
-    LOWRED = '\033[94m'
+    BLUE = '\033[94m'
     OKGREEN = '\033[92m'
     YELLOW = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+def print_total_earn(value):
+    print (col.BLUE +
+           col.BOLD +
+           col.UNDERLINE +
+           'TOTAL EARN:' +
+           col.ENDC, end='')
+    if value > 0:
+        print (col.OKGREEN, end='')
+    else:
+        print (col.FAIL, end='')
+    print (' ' + str(round(value, 2)) + col.ENDC)
 
 
 class coins(object):
@@ -124,6 +137,7 @@ def release_the_beast():
     """
     coins_list = get_coins_from_files()
     format_coins = ()
+    total_earn = 0
     for coin_info in coins_list:
         # Parse / get local and live infos on coin
         name, number, purchase_price = coin_info.replace('\n', '').split(';')
@@ -138,7 +152,8 @@ def release_the_beast():
                            float(number))
         coin_stats.profits_calc()
         coin_stats.print_stats()
-
+        total_earn += coin_stats.value_earn
+    print_total_earn(total_earn)
 
 if __name__ in '__main__':
     release_the_beast()
