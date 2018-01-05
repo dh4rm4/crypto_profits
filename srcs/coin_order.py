@@ -21,11 +21,12 @@ class coin_order(object):
     Coin object to store coin infos
     """
 
-    def __init__(self, name, symbol, purc_value, curr_price, number):
+    def __init__(self, name, symbol, purc_value, curr_price, number, coin_rank):
         self.name = name
         self.symbol = symbol
         self.purchase_price = float(purc_value)
         self.number = int(number)
+        self.coin_rank = coin_rank
 
         self.curr_price = float(curr_price)
         self.value_earn = float(0)
@@ -38,7 +39,7 @@ class coin_order(object):
         Fill object with profits values
         """
         price_diff = self.curr_price - self.purchase_price
-        self.percent_earn = (self.curr_price / self.purchase_price) * 100
+        self.percent_earn = (self.curr_price / self.purchase_price) * 100 - 100
         if price_diff > 0:
             self.positif_evol = True
         self.value_earn = price_diff * self.number

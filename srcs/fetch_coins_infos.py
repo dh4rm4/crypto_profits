@@ -39,7 +39,7 @@ class coinmarket_infos(object):
     def __init__(self, name):
         self.name = name
         self.symbol = str()
-        self.rank = int()
+        self.coin_rank = int()
         self.current_price = float()
 
     def get_value(self):
@@ -58,5 +58,5 @@ class coinmarket_infos(object):
 
     def store_infos(self, infos):
         self.symbol = infos['symbol']
-        self.rank = infos['rank']
+        self.coin_rank = infos['rank']
         self.current_price = infos['price_usd']
