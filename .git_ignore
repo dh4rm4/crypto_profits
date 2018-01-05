@@ -2,3 +2,6 @@ coins.txt
 *~
 profits.logs
 total_values.logs
+
+# Python files
+*.py[co]
