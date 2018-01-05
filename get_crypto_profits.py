@@ -5,6 +5,7 @@ import requests
 import json
 import datetime
 
+
 class col:
     BLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -63,6 +64,8 @@ class total_stats(object):
             print ('Error when calling API: ', err)
             print (format_exc())
             exit()
+
+
 class coins(object):
     """
     Coin object to store coin infos
@@ -176,7 +179,7 @@ def release_the_beast():
     total_earn = 0
     total_value = 0
     for coin_info in coins_list:
-        # Parse / get local and live infos on coin
+        # Parse / get local and live infos on coins
         name, number, purchase_price = coin_info.replace('\n', '').split(';')
         market_infos = coinmarket_infos(name)
         market_infos.get_value()
