@@ -3,10 +3,12 @@
 Main file to start the program
 """
 
+
 from srcs.fetch_coins_infos import fetch_coins_from_file, coinmarket_infos
 from srcs.total_stats import total_stats
 from srcs.coin_order import coin_order
 from srcs.coin import crypto_currency
+
 
 def collect_orders_coins_infos(orders_list):
     coin_dict = {}

@@ -55,7 +55,7 @@ class total_stats(object):
             now = datetime.datetime.now()
             date = now.strftime("%Y-%m-%d %H:%M")
             profits_file.write(date + ';' + str(int(self.earn)) + '\n')
-            total_values_file.write(date + ';' + str(int(self.total_value)) + '\n')
+            total_values_file.write(date + ';' + self.total_value + '\n')
             profits_file.close()
             total_values_file.close()
 

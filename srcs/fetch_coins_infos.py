@@ -31,7 +31,6 @@ def fetch_coins_from_file():
         exit()
 
 
-
 class coinmarket_infos(object):
     """
     Get and store live infos from coinmarketcap.com
