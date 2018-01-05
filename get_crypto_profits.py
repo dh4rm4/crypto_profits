@@ -3,7 +3,7 @@
 from traceback import format_exc
 import requests
 import json
-
+import datetime
 
 class col:
     BLUE = '\033[94m'
@@ -15,7 +15,7 @@ class col:
     UNDERLINE = '\033[4m'
 
 
-class print_total_stats(object):
+class total_stats(object):
     """
     Final output of all stats
     """
@@ -44,7 +44,25 @@ class print_total_stats(object):
             print (col.FAIL, end='')
         print ('  ' + str(round(self.earn, 2)) + col.ENDC + '$')
 
+    def save_logs(self):
+        """
+        Save stats in logs files
+        A treatment of those stats will be done in the future
+        """
+        try:
+            profits_file = open('stats/profits.logs', 'a')
+            total_values_file = open('stats/total_values.logs', 'a')
+            now = datetime.datetime.now()
+            date = now.strftime("%Y-%m-%d %H:%M")
+            profits_file.write(date + ';' + str(int(self.earn)) + '\n')
+            total_values_file.write(date + ';' + str(int(self.total_value)) + '\n')
+            profits_file.close()
+            total_values_file.close()
 
+        except Exception as err:
+            print ('Error when calling API: ', err)
+            print (format_exc())
+            exit()
 class coins(object):
     """
     Coin object to store coin infos
@@ -173,9 +191,10 @@ def release_the_beast():
         coin_stats.print_stats()
         total_earn += coin_stats.value_earn
         total_value += coin_stats.total_value
-    p = print_total_stats(total_value, total_earn)
-    p.print_total_value()
-    p.print_total_earn()
+    stats = total_stats(total_value, total_earn)
+    stats.print_total_value()
+    stats.print_total_earn()
+    stats.save_logs()
 
 if __name__ in '__main__':
     release_the_beast()
