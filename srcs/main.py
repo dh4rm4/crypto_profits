@@ -33,7 +33,7 @@ def collect_orders_coins_infos(orders_list):
 
     # PRINT
     for coin in coin_dict.items():
-        coin[1].print_coin_stats()
+        coin[1].print_crypto_stats()
 #        coin_dict[coin].print_coin_stats()
 
 
