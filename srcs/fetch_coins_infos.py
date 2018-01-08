@@ -46,7 +46,9 @@ class coinmarket_infos(object):
         Get last infos about coin
         """
         try:
-            url = 'https://api.coinmarketcap.com/v1/ticker/' + self.name
+            url = 'https://api.coinmarketcap.com/v1/ticker/' + \
+                  self.name + \
+                  '/?convert=EUR'
             rep = requests.get(url)
             self.store_infos(rep.json()[0])
 
@@ -58,4 +60,4 @@ class coinmarket_infos(object):
     def store_infos(self, infos):
         self.symbol = infos['symbol']
         self.coin_rank = infos['rank']
-        self.current_price = infos['price_usd']
+        self.current_price = infos['price_eur']
