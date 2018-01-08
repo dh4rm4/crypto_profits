@@ -11,12 +11,13 @@ class coin_order(object):
     Coin object to store coin infos
     """
 
-    def __init__(self, name, symbol, purc_value, curr_price, number, rank):
+    def __init__(self, name, git_url, symbol, purc_value, curr_price, number, rank):
         self.name = name
         self.symbol = symbol
         self.purchase_price = float(purc_value)
         self.number = int(number)
         self.coin_rank = rank
+        self.git_url = git_url
 
         self.curr_price = float(curr_price)
         self.value_earn = float(0)

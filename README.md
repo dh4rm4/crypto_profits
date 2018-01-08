@@ -5,15 +5,16 @@ Shows actual values and profits of coins based on coinmarketcap.com
 
 The file must be parse as follow:
 ```
-currency fullname;number owned;purchase price
+currency fullname;number owned;purchase price;logs_repo_url
 *If fullname have more than one word, separate each with '-'
+*logs repo url is for future graph stats
 ```
 
 ### Ex:
 
 ```
-bitcoin;2;42000
-ethereum;420;1242
-stellar;42;0.024
-real-estate-tokens;150;1.65
+bitcoin;2;42000;gitlab.loc/dh4rm4/btc_logs.git
+ethereum;420;1242;gitlab.loc/dh4rm4/eth_logs.git
+stellar;42;0.024;gitlab.loc/dh4rm4/xlm_logs.git
+real-estate-tokens;150;1.65;gitlab.loc/dh4rm4/rex_logs.git
 ```

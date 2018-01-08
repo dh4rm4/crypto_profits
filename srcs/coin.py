@@ -3,6 +3,10 @@
 COIN OBJECT
 """
 
+from os.path import isdir
+from srcs.git_actions import repository
+from datetime import datetime
+
 class crypto_currency(object):
     """
     Store all infos on specific coin
@@ -20,6 +24,14 @@ class crypto_currency(object):
         self.total_earn = order.value_earn
         self.total_possess = order.number
 
+        # git variable for logs' repository
+        self.logs_repo = None
+        self.git_url = order.git_url
+        self.logs_dir = './stats/' + \
+                        order.git_url.split('/')[-1].replace('.git', '') + \
+                        '/'
+        self.now = self.init_date()
+
     def add_order(self, order):
         """
         Add an order in a COIN
@@ -29,11 +41,42 @@ class crypto_currency(object):
         self.total_earn += order.value_earn
         self.total_possess += order.number
 
-    def write_logs_in_files(self, filename, value):
+    def log_current_values(self):
+        self.write_logs_in_file("total_value.log", str(round(self.total_value, 2)))
+        self.write_logs_in_file("total_earn.log", str(round(self.total_earn, 2)))
+
+    def write_logs_in_file(self, filename, value):
         """
         Write value in the specify file as logs
         for future stats tools
         """
+        if self.logs_repo is None:
+            self.init_logs_repository()
+        file_path = self.logs_dir + filename
+        logs_file = open(file_path, 'a')
+        log = self.now + ';' + value
+        logs_file.write(log)
+        self.upload_logs(file_path)
 
-    def print_crypto_stats(self):
-        print (self.symbol + ': ' + str(self.current_price))
+    def init_logs_repository(self):
+        """
+        Check and Clone/ pull depot for logs
+        if necessary
+        """
+        self.logs_repo = repository(self.git_url, self.logs_dir)
+        if isdir(self.logs_dir) is False:
+            self.logs_repo.clone_repository()
+        else:
+            self.logs_repo.init_repository()
+
+    def init_date(self):
+        """
+        Format date for logs
+        """
+        now = datetime.now()
+        self.now = now.strftime("%Y-%m-%d %H:%M")
+
+    def upload_logs(self, file_path):
+        self.logs_repo.index_file(file_path)
+        self.logs_repo.commit_change('automatic logs update')
+        self.logs_repo.push_commit()

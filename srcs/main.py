@@ -14,12 +14,13 @@ def collect_orders_coins_infos(orders_list):
     coin_dict = {}
     for order_infos in orders_list:
         # Parse / get local and live infos on coins
-        name, number, purchase_price = order_infos.replace('\n', '').split(';')
+        name, number, purchase_price, git_url = order_infos.replace('\n', '').split(';')
         market_infos = coinmarket_infos(name)
         market_infos.get_value()
 
         # Manage stats
         order_stats = coin_order(name,
+                                 git_url,
                                  market_infos.symbol,
                                  float(purchase_price),
                                  float(market_infos.current_price),
@@ -33,8 +34,7 @@ def collect_orders_coins_infos(orders_list):
 
     # PRINT
     for coin in coin_dict.items():
-        coin[1].print_crypto_stats()
-#        coin_dict[coin].print_coin_stats()
+        coin[1].log_current_values()
 
 
 def release_the_beast():

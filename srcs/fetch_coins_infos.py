@@ -16,7 +16,7 @@ def fetch_coins_from_file():
     fullname_coin;number_possessed;purchase_price
 
     Ex:
-    ripple;420;0.42
+    ripple;420;0.42;gitlab.loc/boid/logs_repository_url.git
     """
     try:
         coins_list = list()
