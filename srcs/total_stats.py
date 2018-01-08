@@ -43,23 +43,3 @@ class total_stats(object):
         else:
             print (col.FAIL, end='')
         print ('  ' + str(round(self.earn, 2)) + col.ENDC + '$')
-
-    def save_logs(self):
-        """
-        Save stats in logs files
-        A treatment of those stats will be done in the future
-        """
-        try:
-            profits_file = open('stats/profits.logs', 'a')
-            total_values_file = open('stats/total_values.logs', 'a')
-            now = datetime.datetime.now()
-            date = now.strftime("%Y-%m-%d %H:%M")
-            profits_file.write(date + ';' + str(int(self.earn)) + '\n')
-            total_values_file.write(date + ';' + self.total_value + '\n')
-            profits_file.close()
-            total_values_file.close()
-
-        except Exception as err:
-            print ('Error when calling API: ', err)
-            print (format_exc())
-            exit()

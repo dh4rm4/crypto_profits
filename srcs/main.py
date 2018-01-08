@@ -12,6 +12,8 @@ from srcs.coin import crypto_currency
 
 def collect_orders_coins_infos(orders_list):
     coin_dict = {}
+    total_value = 0
+    total_earn = 0
     for order_infos in orders_list:
         # Parse / get local and live infos on coins
         name, number, purchase_price = order_infos.replace('\n', '').split(';')
@@ -26,6 +28,8 @@ def collect_orders_coins_infos(orders_list):
                                  float(number),
                                  market_infos.coin_rank)
         order_stats.profits_calc()
+        total_value += order_stats.total_value
+        total_earn += order_stats.value_earn
         if order_stats.name not in coin_dict:
             coin_dict[order_stats.name] = crypto_currency(order_stats)
         else:
@@ -34,7 +38,9 @@ def collect_orders_coins_infos(orders_list):
     # PRINT
     for coin in coin_dict.items():
         coin[1].print_coin_stats()
-#        coin_dict[coin].print_coin_stats()
+    total = total_stats(total_value, total_earn)
+    total.print_total_earn()
+    total.print_total_value()
 
 
 def release_the_beast():
