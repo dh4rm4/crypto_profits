@@ -10,15 +10,28 @@ from srcs.coin_order import coin_order
 from srcs.coin import crypto_currency
 
 
+def parse_order_infos(order_infos):
+    """
+    Parse infos from one line of coin.txt
+    """
+    try:
+        name, nb, purchase_price, git_url = order_infos.replace('\n', '').split(';')
+        return name, nb, purchase_price, git_url
+
+    except ValueError:
+        print ('Error: You did not format well coins.txt file')
+        exit()
+
+
 def collect_orders_coins_infos(orders_list):
     coin_dict = {}
     for order_infos in orders_list:
         # Parse / get local and live infos on coins
-        name, number, purchase_price, git_url = order_infos.replace('\n', '').split(';')
+        name, number, purchase_price, git_url = parse_order_infos(order_infos)
         market_infos = coinmarket_infos(name)
         market_infos.get_value()
 
-        # Manage stats
+        # Manage orders stats
         order_stats = coin_order(name,
                                  git_url,
                                  market_infos.symbol,
@@ -27,6 +40,8 @@ def collect_orders_coins_infos(orders_list):
                                  float(number),
                                  market_infos.coin_rank)
         order_stats.profits_calc()
+
+        # Store orders' stats in coin object
         if order_stats.name not in coin_dict:
             coin_dict[order_stats.name] = crypto_currency(order_stats)
         else:

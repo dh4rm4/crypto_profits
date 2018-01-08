@@ -31,9 +31,10 @@ class crypto_currency(object):
         self.now = self.init_date()
 
     def get_logs_directory_path(self, git_url):
-        path = './stats'
+        path = './stats/'
         path += git_url.split('/')[-1].replace('.git', '')
         path += '/'
+        return path
 
     def add_order(self, order):
         """
@@ -55,11 +56,11 @@ class crypto_currency(object):
         """
         if self.logs_repo is None:
             self.init_logs_repository()
-        file_path = self.logs_dir + filename
-        logs_file = open(file_path, 'a')
+        log_file_path = self.logs_dir + filename
+        logs_file = open(log_file_path, 'a')
         log = self.now + ';' + value
         logs_file.write(log)
-        self.upload_logs(file_path)
+        self.upload_logs(filename)
 
     def init_logs_repository(self):
         """
@@ -77,9 +78,10 @@ class crypto_currency(object):
         Format date for logs
         """
         now = datetime.now()
-        self.now = now.strftime("%Y-%m-%d %H:%M")
+        return now.strftime("%Y-%m-%d %H:%M")
 
-    def upload_logs(self, file_path):
-        self.logs_repo.index_file(file_path)
+    def upload_logs(self, filename):
+        import pdb; pdb.set_trace()
+        self.logs_repo.index_file(filename)
         self.logs_repo.commit_change('automatic logs update')
         self.logs_repo.push_commit()

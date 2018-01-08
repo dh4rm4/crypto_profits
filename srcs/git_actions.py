@@ -29,7 +29,7 @@ class repository(object):
         """
         Index filename for next commit
         """
-        self.repo_obj.index([filename])
+        self.repo_obj.index.add([filename])
 
     def commit_change(self, msg):
         """
