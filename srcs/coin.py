@@ -27,10 +27,13 @@ class crypto_currency(object):
         # git variable for logs' repository
         self.logs_repo = None
         self.git_url = order.git_url
-        self.logs_dir = './stats/' + \
-                        order.git_url.split('/')[-1].replace('.git', '') + \
-                        '/'
+        self.logs_dir = self.get_logs_directory_path(order.git_url)
         self.now = self.init_date()
+
+    def get_logs_directory_path(self, git_url):
+        path = './stats'
+        path += git_url.split('/')[-1].replace('.git', '')
+        path += '/'
 
     def add_order(self, order):
         """
