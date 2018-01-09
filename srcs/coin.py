@@ -81,7 +81,6 @@ class crypto_currency(object):
         return now.strftime("%Y-%m-%d %H:%M")
 
     def upload_logs(self, filename):
-        import pdb; pdb.set_trace()
         self.logs_repo.index_file(filename)
         self.logs_repo.commit_change('automatic logs update')
         self.logs_repo.push_commit()
