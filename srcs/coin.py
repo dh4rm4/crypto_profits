@@ -56,13 +56,13 @@ class crypto_currency(object):
                col.ENDC +
                ':  ', end='')
         print ('Rank: ' + str(self.rank) + col.ENDC, end='')
-        print ('\t->  ' + col.BOLD + str(self.curr_price) + '$' + col.ENDC)
+        print ('\t->  ' + col.BOLD + str(self.curr_price) + '€' + col.ENDC)
         i = 0
         for order in self.orders:
             i += 1
             print ('#' + str(i) + ': ', end='')
             self.output_color(order.positif_evol)
-            print (str(round(order.value_earn, 2)) + '$' + col.ENDC, end='')
+            print (str(round(order.value_earn, 2)) + '€' + col.ENDC, end='')
             print ('\t->\t', end='')
             self.output_color(order.positif_evol)
             print (str(round(order.percent_earn, 2)) + '%' + col.ENDC)

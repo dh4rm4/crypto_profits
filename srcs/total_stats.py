@@ -42,4 +42,4 @@ class total_stats(object):
             print (col.OKGREEN, end='')
         else:
             print (col.FAIL, end='')
-        print ('  ' + str(round(self.earn, 2)) + col.ENDC + '$')
+        print ('  ' + str(round(self.earn, 2)) + col.ENDC + '€')
