@@ -25,7 +25,7 @@ class coin_order(object):
         self.name = name
         self.symbol = symbol
         self.purchase_price = float(purc_value)
-        self.number = int(number)
+        self.number = float(number)
         self.coin_rank = rank
 
         self.curr_price = float(curr_price)
