@@ -39,7 +39,7 @@ def tmp_output(coin):
     if i > 1:
         print ('Total Value: ' + str(round(coin.total_value, 2)))
         print ('Total Earn: ' + str(round(coin.total_earn, 2)))
-        print ('')
+    print ('')
 
 def tmp_print_total(total_earn, total_value):
     print (col.BLUE +
