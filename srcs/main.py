@@ -17,8 +17,9 @@ def collect_orders_coins_infos(orders_list):
     for order_infos in orders_list:
         # Parse / get local and live infos on coins
         name, number, purchase_price = order_infos.replace('\n', '').split(';')
-        market_infos = coinmarket_infos(name)
-        market_infos.get_value()
+        if name not in coin_dict:
+            market_infos = coinmarket_infos(name)
+            market_infos.get_value()
 
         # Manage stats
         order_stats = coin_order(name,
