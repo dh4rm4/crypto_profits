@@ -4,19 +4,19 @@ Main file to start the program
 """
 
 
-from srcs.fetch_coins_infos import fetch_coins_from_file, coinmarket_infos
+from srcs.fetch_coins_infos import fetch_coins_from_file, get_live_coin_infos
 from srcs.total_stats import total_stats
 from srcs.coin_order import coin_order
 from srcs.coin import crypto_currency
-
+from srcs.tmp_output import tmp_output
 
 def parse_order_infos(order_infos):
     """
     Parse infos from one line of coin.txt
     """
     try:
-        name, nb, purchase_price, git_url = order_infos.replace('\n', '').split(';')
-        return name, nb, purchase_price, git_url
+        name, symbol, nb, purchase_price, git_url = order_infos.replace('\n', '').split(';')
+        return name, symbol, nb, purchase_price, git_url
 
     except ValueError:
         print ('Error: You did not format well coins.txt file')
@@ -27,9 +27,10 @@ def collect_orders_coins_infos(orders_list):
     coin_dict = {}
     for order_infos in orders_list:
         # Parse / get local and live infos on coins
-        name, number, purchase_price, git_url = parse_order_infos(order_infos)
-        market_infos = coinmarket_infos(name)
-        market_infos.get_value()
+        name, symbol, number, purchase_price, git_url = parse_order_infos(order_infos)
+        if name not in coin_dict:
+            market_infos = get_live_coin_infos(name, symbol)
+            market_infos.get_infos()
 
         # Manage orders stats
         order_stats = coin_order(name,
@@ -49,7 +50,8 @@ def collect_orders_coins_infos(orders_list):
 
     # PRINT
     for coin in coin_dict.items():
-        coin[1].log_current_values()
+        tmp_output(coin[1])
+
 
 
 def release_the_beast():
