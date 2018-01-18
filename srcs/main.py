@@ -15,8 +15,8 @@ def parse_order_infos(order_infos):
     Parse infos from one line of coin.txt
     """
     try:
-        name, nb, purchase_price, git_url = order_infos.replace('\n', '').split(';')
-        return name, nb, purchase_price, git_url
+        name, symbol, nb, purchase_price, git_url = order_infos.replace('\n', '').split(';')
+        return name, symbol, nb, purchase_price, git_url
 
     except ValueError:
         print ('Error: You did not format well coins.txt file')
@@ -27,7 +27,7 @@ def collect_orders_coins_infos(orders_list):
     coin_dict = {}
     for order_infos in orders_list:
         # Parse / get local and live infos on coins
-        name, number, purchase_price, git_url = parse_order_infos(order_infos)
+        name, symbol, number, purchase_price, git_url = parse_order_infos(order_infos)
         market_infos = coinmarket_infos(name)
         market_infos.get_value()
 

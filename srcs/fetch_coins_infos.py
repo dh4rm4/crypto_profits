@@ -13,10 +13,10 @@ def fetch_coins_from_file():
     """
     Open the file coins.txt.
     It must have the hierachy:
-    fullname_coin;number_possessed;purchase_price
+    fullname_coin;symbol;number_possessed;purchase_price
 
     Ex:
-    ripple;420;0.42;gitlab.loc/boid/logs_repository_url.git
+    ripple;xrp;420;0.42;gitlab.loc/boid/logs_repository_url.git
     """
     try:
         coins_list = list()
