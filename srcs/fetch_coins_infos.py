@@ -23,7 +23,7 @@ def fetch_coins_from_file():
         f = open('coins.txt', 'r')
         for line in f:
             coins_list.append(line)
-        return coins_list
+        return sorted(coins_list)
 
     except Exception as err:
         print ('Error when opening coins.txt: ', err)
