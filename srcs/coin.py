@@ -54,13 +54,19 @@ class crypto_currency(object):
         Write value in the specify file as logs
         for future stats tools
         """
-        if self.logs_repo is None:
-            self.init_logs_repository()
-        log_file_path = self.logs_dir + filename
-        logs_file = open(log_file_path, 'a')
-        log = self.now + ';' + value
-        logs_file.write(log)
-        self.upload_logs(filename)
+        try:
+            if self.logs_repo is None:
+                self.init_logs_repository()
+            if self.valid_repo is False:
+                return
+            log_file_path = self.logs_dir + filename
+            logs_file = open(log_file_path, 'a')
+            log = self.now + ';' + value
+            logs_file.write(log)
+            self.upload_logs(filename)
+
+        except Exception as err:
+            print (err)
 
     def init_logs_repository(self):
         """
@@ -69,9 +75,9 @@ class crypto_currency(object):
         """
         self.logs_repo = repository(self.git_url, self.logs_dir)
         if isdir(self.logs_dir) is False:
-            self.logs_repo.clone_repository()
+            self.valid_repo = self.logs_repo.clone_repository()
         else:
-            self.logs_repo.init_repository()
+            self.valid_repo = self.logs_repo.init_repository()
 
     def init_date(self):
         """
