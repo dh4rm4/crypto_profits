@@ -19,8 +19,11 @@ class repository(object):
         try:
             self.repo_obj = Repo.clone_from(self.repo_url, self.repo_path)
             return True
+
         except Exception as err:
-            print (err)
+            print ("[-] Something happen when cloning repo.")
+            print ("\tCheck URL: " + self.repo_url)
+            print ("\tLogs for this coin will be ignore", end="\n\n")
             return False
 
     def init_repository(self):
@@ -61,6 +64,9 @@ class repository(object):
         """
         try:
             self.origin = self.repo_obj.remote(name='origin')
+            if self.origin.exists() is False:
+                self.origin = self.repo_obj.create_remote(name='origin',
+                                                          url=self.repo_url)
         except Exception as err:
             print (err)
 
@@ -70,8 +76,9 @@ class repository(object):
                 self.init_origin()
                 self.origin.pull()
             return True
+
         except Exception as err:
-            print (err)
+            print ("[-] Something happen when pulling repo. Check your git conf. ")
             return False
 
     def push_commit(self):
