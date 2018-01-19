@@ -61,8 +61,9 @@ class crypto_currency(object):
                 return
             log_file_path = self.logs_dir + filename
             logs_file = open(log_file_path, 'a')
-            log = self.now + ';' + value
+            log = self.now + ';' + value + '\n'
             logs_file.write(log)
+            logs_file.close()
             self.upload_logs(filename)
 
         except Exception as err:
