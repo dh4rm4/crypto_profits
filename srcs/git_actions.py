@@ -85,6 +85,6 @@ class repository(object):
         try:
             if self.origin is None:
                 self.init_origin()
-            self.origin.push()
+            self.origin.push('master')
         except Exception as err:
             print (err)
