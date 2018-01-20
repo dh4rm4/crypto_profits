@@ -48,6 +48,8 @@ class crypto_currency(object):
     def log_current_values(self):
         self.write_logs_in_file("total_value.log", str(round(self.total_value, 2)))
         self.write_logs_in_file("total_earn.log", str(round(self.total_earn, 2)))
+        self.upload_logs('total_value.log', 'total_earn.log')
+
 
     def write_logs_in_file(self, filename, value):
         """
@@ -64,7 +66,6 @@ class crypto_currency(object):
             log = self.now + ';' + value + '\n'
             logs_file.write(log)
             logs_file.close()
-            self.upload_logs(filename)
 
         except Exception as err:
             print (err)
@@ -87,7 +88,8 @@ class crypto_currency(object):
         now = datetime.now()
         return now.strftime("%Y-%m-%d %H:%M")
 
-    def upload_logs(self, filename):
-        self.logs_repo.index_file(filename)
+    def upload_logs(self, f1, f2):
+        self.logs_repo.index_file(f1)
+        self.logs_repo.index_file(f2)
         self.logs_repo.commit_change('automatic logs update')
         self.logs_repo.push_commit()
