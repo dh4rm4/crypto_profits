@@ -4,7 +4,6 @@ COIN OBJECT
 """
 
 from os.path import isdir
-from srcs.git_actions import repository
 from datetime import datetime
 
 class crypto_currency(object):
@@ -23,12 +22,6 @@ class crypto_currency(object):
         self.total_value = order.total_value
         self.total_earn = order.value_earn
         self.total_possess = order.number
-
-        # git variable for logs' repository
-        self.logs_repo = None
-        self.git_url = order.git_url
-        self.logs_dir = self.get_logs_directory_path(order.git_url)
-        self.now = self.init_date()
 
     def get_logs_directory_path(self, git_url):
         path = './stats/'

@@ -25,7 +25,7 @@ def tmp_output(coin):
            col.ENDC +
            ':  ', end='')
     print ('Rank: ' + str(coin.rank) + col.ENDC, end='')
-    print ('\t->  ' + col.BOLD + str(coin.current_price) + '€' + col.ENDC)
+    print ('\t->  ' + col.BOLD + str(round(coin.current_price, 5)) + '€' + col.ENDC)
     i = 0
     for order in coin.orders:
         i += 1
